@@ -1,0 +1,31 @@
+name: build
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.10.2'
+      - name: Build mod JAR
+        run: gradle build --no-daemon
+      - name: Upload standalone mod JAR
+        uses: actions/upload-artifact@v4
+        with:
+          name: essencethief-${{ github.sha }}
+          path: build/libs/essencethief-*.jar
+          if-no-files-found: error
+          compression-level: 0
