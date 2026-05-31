@@ -1,4 +1,4 @@
-package com.akitaattributegaming.essencethief.api;
+package com.akitaattribute.essencethief.api;
 
 import org.junit.jupiter.api.Test;
 

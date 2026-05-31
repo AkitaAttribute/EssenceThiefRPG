@@ -1,4 +1,4 @@
-package com.akitaattributegaming.essencethief.api;
+package com.akitaattribute.essencethief.api;
 
 /** An immutable RGB color accepted as either channels or a conventional 0xRRGGBB value. */
 public record EssenceColor(int red, int green, int blue) {

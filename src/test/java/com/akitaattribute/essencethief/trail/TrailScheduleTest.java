@@ -1,4 +1,4 @@
-package com.akitaattributegaming.essencethief.trail;
+package com.akitaattribute.essencethief.trail;
 
 import org.junit.jupiter.api.Test;
 

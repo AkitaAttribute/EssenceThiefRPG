@@ -1,4 +1,4 @@
-package com.akitaattributegaming.essencethief.trail;
+package com.akitaattribute.essencethief.trail;
 
 /** Pure scheduling math for three staggered streams, each rising two blocks before a half-second gap. */
 public final class TrailSchedule {

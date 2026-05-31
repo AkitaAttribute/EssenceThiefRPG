@@ -1,13 +1,10 @@
-package com.akitaattributegaming.essencethief.trail;
+package com.akitaattribute.essencethief.trail;
 
-import com.akitaattributegaming.essencethief.EssenceThiefMod;
-import com.akitaattributegaming.essencethief.api.EssenceColor;
+import com.akitaattribute.essencethief.api.EssenceColor;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import org.joml.Vector3f;
 
 import java.util.Map;
@@ -15,7 +12,6 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 /** Server-side registry which can decorate mobs, item drops, vanilla entities, and Essence wrappers alike. */
-@Mod.EventBusSubscriber(modid = EssenceThiefMod.MOD_ID)
 public final class EntityTrailManager {
     private static final double CONE_RADIUS = 0.45D;
     private static final Map<UUID, TrackedTrail> TRAILS = new ConcurrentHashMap<>();
@@ -34,7 +30,6 @@ public final class EntityTrailManager {
         TRAILS.remove(entity.getUUID());
     }
 
-    @SubscribeEvent
     public static void onLevelTick(TickEvent.LevelTickEvent event) {
         if (event.phase != TickEvent.Phase.END || !(event.level instanceof ServerLevel level)) {
             return;

@@ -1,8 +1,8 @@
-package com.akitaattributegaming.essencethief.client;
+package com.akitaattribute.essencethief.client;
 
-import com.akitaattributegaming.essencethief.EssenceThiefMod;
-import com.akitaattributegaming.essencethief.api.Essence;
-import com.akitaattributegaming.essencethief.api.EssenceColor;
+import com.akitaattribute.essencethief.EssenceThiefMod;
+import com.akitaattribute.essencethief.api.Essence;
+import com.akitaattribute.essencethief.api.EssenceColor;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;

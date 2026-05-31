@@ -1,6 +1,6 @@
-package com.akitaattributegaming.essencethief.api;
+package com.akitaattribute.essencethief.api;
 
-import com.akitaattributegaming.essencethief.trail.EntityTrailManager;
+import com.akitaattribute.essencethief.trail.EntityTrailManager;
 import net.minecraft.world.entity.Entity;
 
 import java.util.Objects;

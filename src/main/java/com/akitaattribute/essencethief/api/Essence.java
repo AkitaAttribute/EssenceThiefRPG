@@ -1,4 +1,4 @@
-package com.akitaattributegaming.essencethief.api;
+package com.akitaattribute.essencethief.api;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.ExperienceOrb;
