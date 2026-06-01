@@ -4,7 +4,7 @@ A Forge mod API for creating colored **essence** XP orbs and attaching colored, 
 
 ## Compatibility strategy
 
-The current distributable is compiled for Minecraft **1.21.1** and Forge **52.1.0**. Minecraft minor generations are not bytecode-compatible with each other, so this JAR deliberately advertises Minecraft **1.21.1** only instead of failing during mod loading on older Minecraft versions. The Forge loader range remains broad: the mod uses a reflective event-bus bridge for Forge API-shape differences and reports a descriptive feature-availability error if a Forge runtime cannot provide a required capability. Build a separate source-compatible artifact when targeting a different Minecraft generation.
+The distributable is compiled against Minecraft **1.21.1** and Forge **52.1.0**, while `mods.toml` accepts the requested Minecraft **1.20.x** and **1.21.x** families through the Maven version range `[1.20,1.22)`. The Forge loader range also remains broad: the mod uses a reflective event-bus bridge for Forge API-shape differences and reports a descriptive feature-availability error if a Forge runtime cannot provide a required capability. Cross-version loading remains best-effort because Minecraft and Forge APIs can change between releases; the metadata intentionally does not reject a compatible-looking runtime solely because it is a later patch release.
 
 ## API examples
 
