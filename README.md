@@ -4,7 +4,14 @@ A Forge mod API for creating colored **essence** XP orbs and attaching colored, 
 
 ## Compatibility strategy
 
-The distributable is compiled against Minecraft **1.21.1** and Forge **52.1.0**, while `mods.toml` accepts the requested Minecraft **1.20.x** and **1.21.x** families through the Maven version range `[1.20,1.22)`. The Forge loader range also remains broad: the mod uses a reflective event-bus bridge for Forge API-shape differences and reports a descriptive feature-availability error if a Forge runtime cannot provide a required capability. Cross-version loading remains best-effort because Minecraft and Forge APIs can change between releases; the metadata intentionally does not reject a compatible-looking runtime solely because it is a later patch release.
+Minecraft `1.20.x` and `1.21.x` use different Minecraft, Forge, EventBus, Java, and ForgeGradle APIs. The repository therefore produces two standalone JARs instead of attempting to load one cross-generation binary:
+
+| Artifact line | Compile target | Forge target | Java | Gradle | Minecraft range | Required Forge range |
+| --- | --- | --- | --- | --- | --- | --- |
+| `essencethief-1.20.1-*.jar` | Minecraft `1.20.1` | Forge `47.4.20` | 17 | 8.8 | `[1.20,1.21)` | `[47,48)` |
+| `essencethief-1.21.11-*.jar` | Minecraft `1.21.11` | Forge `61.1.7` | 21 | 9.3.1 | `[1.21,1.22)` | `[61,)` |
+
+Use the JAR matching the installed Minecraft generation and Forge major line. The Forge dependency range prevents either artifact from loading on the incompatible event-bus generation. GitHub Actions compiles and uploads both standalone artifacts independently. No JAR is checked into source control.
 
 ## API examples
 
@@ -29,12 +36,18 @@ Remove a trail when it is no longer needed:
 decorated.removeRisingTrail();
 ```
 
-Trail registration must happen on the logical server. The manager emits three colored streams from the top of the entity, staggers them by ten ticks (0.5 seconds), expands them into a cone while rising two blocks, and inserts a ten-tick gap before each stream repeats. Orb colors are encoded through vanilla-synchronized entity data so clients can render them without custom networking.
+Each implementation emits three colored streams from the entity top, staggers them by ten ticks (0.5 seconds), expands them into a cone while rising two blocks, and inserts a ten-tick gap before each stream repeats.
 
 ## Build
 
+Build the Minecraft `1.20.1` variant with Java 17 and Gradle 8.8:
+
 ```bash
-gradle build
+gradle clean build
 ```
 
-The distributable JAR is written to `build/libs/` as a local build output and is intentionally not checked into source control. GitHub Actions installs Gradle, builds the mod, and uploads the standalone JAR directly as a workflow artifact (not inside an additional ZIP archive).
+Build the Minecraft `1.21.11` variant with Java 21 and Gradle 9.3.1:
+
+```bash
+gradle -p variants/forge-1.21.11 clean build
+```

@@ -10,22 +10,36 @@ permissions:
 
 jobs:
   build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: minecraft-1.20.1
+            project_dir: .
+            java: '17'
+            gradle: '8.8'
+            jar: build/libs/essencethief-1.20.1-*.jar
+          - name: minecraft-1.21.11
+            project_dir: variants/forge-1.21.11
+            java: '21'
+            gradle: '9.3.1'
+            jar: variants/forge-1.21.11/build/libs/essencethief-1.21.11-*.jar
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: '21'
+          java-version: ${{ matrix.java }}
       - uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-version: '8.10.2'
-      - name: Build mod JAR
-        run: gradle build --no-daemon
-      - name: Upload standalone mod JAR
+          gradle-version: ${{ matrix.gradle }}
+      - name: Build ${{ matrix.name }} standalone mod JAR
+        run: gradle -p ${{ matrix.project_dir }} clean build --no-daemon
+      - name: Upload ${{ matrix.name }} standalone mod JAR
         uses: actions/upload-artifact@v4
         with:
-          name: essencethief-${{ github.sha }}
-          path: build/libs/essencethief-*.jar
+          name: essencethief-${{ matrix.name }}-${{ github.sha }}
+          path: ${{ matrix.jar }}
           if-no-files-found: error
           compression-level: 0

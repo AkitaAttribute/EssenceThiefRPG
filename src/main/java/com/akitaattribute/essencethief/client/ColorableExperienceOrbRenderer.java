@@ -22,7 +22,7 @@ import net.minecraftforge.fml.common.Mod;
 
 /** Vanilla-compatible XP-orb renderer which honors Essence's synced RGB marker when one exists. */
 public final class ColorableExperienceOrbRenderer extends EntityRenderer<ExperienceOrb> {
-    private static final ResourceLocation TEXTURE = ResourceLocation.withDefaultNamespace("textures/entity/experience_orb.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation("textures/entity/experience_orb.png");
     private static final RenderType RENDER_TYPE = RenderType.itemEntityTranslucentCull(TEXTURE);
 
     public ColorableExperienceOrbRenderer(EntityRendererProvider.Context context) {
@@ -68,12 +68,13 @@ public final class ColorableExperienceOrbRenderer extends EntityRenderer<Experie
     }
 
     private static void vertex(VertexConsumer consumer, PoseStack.Pose pose, float x, float y, EssenceColor color, float u, float v) {
-        consumer.addVertex(pose, x, y, 0.0F)
-            .setColor(color.red(), color.green(), color.blue(), 128)
-            .setUv(u, v)
-            .setOverlay(OverlayTexture.NO_OVERLAY)
-            .setLight(15728880)
-            .setNormal(pose, 0.0F, 1.0F, 0.0F);
+        consumer.vertex(pose.pose(), x, y, 0.0F)
+            .color(color.red(), color.green(), color.blue(), 128)
+            .uv(u, v)
+            .overlayCoords(OverlayTexture.NO_OVERLAY)
+            .uv2(15728880)
+            .normal(pose.normal(), 0.0F, 1.0F, 0.0F)
+            .endVertex();
     }
 
     @Mod.EventBusSubscriber(modid = EssenceThiefMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
