@@ -5,6 +5,8 @@ import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
+import net.minecraftforge.event.entity.EntityLeaveLevelEvent;
 
 import java.util.Map;
 import java.util.UUID;
@@ -26,6 +28,17 @@ public final class EntityTrailManager {
 
     public static void untrack(Entity entity) {
         TRAILS.remove(entity.getUUID());
+    }
+
+    public static void onEntityJoin(EntityJoinLevelEvent event) {
+        Entity entity = event.getEntity();
+        if (!entity.level().isClientSide()) {
+            TRAILS.putIfAbsent(entity.getUUID(), new TrackedTrail(entity, EssenceColor.DEFAULT));
+        }
+    }
+
+    public static void onEntityLeave(EntityLeaveLevelEvent event) {
+        untrack(event.getEntity());
     }
 
     public static void onLevelTick(TickEvent.LevelTickEvent.Post event) {

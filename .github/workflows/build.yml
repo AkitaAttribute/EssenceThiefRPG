@@ -18,11 +18,15 @@ jobs:
             project_dir: .
             java: '17'
             gradle: '8.8'
+            gradle_args: ''
             jar: build/libs/essencethief-1.20.1-*.jar
           - name: minecraft-1.21.11
             project_dir: variants/forge-1.21.11
-            java: '21'
+            java: |-
+              21
+              25
             gradle: '9.3.1'
+            gradle_args: '-Dorg.gradle.java.installations.paths=${JAVA_HOME_21_X64},${JAVA_HOME_25_X64}'
             jar: variants/forge-1.21.11/build/libs/essencethief-1.21.11-*.jar
     runs-on: ubuntu-latest
     steps:
@@ -35,7 +39,7 @@ jobs:
         with:
           gradle-version: ${{ matrix.gradle }}
       - name: Build ${{ matrix.name }} standalone mod JAR
-        run: gradle -p ${{ matrix.project_dir }} clean build --no-daemon
+        run: gradle -p ${{ matrix.project_dir }} ${{ matrix.gradle_args }} clean build --no-daemon
       - name: Upload ${{ matrix.name }} standalone mod JAR
         uses: actions/upload-artifact@v4
         with:

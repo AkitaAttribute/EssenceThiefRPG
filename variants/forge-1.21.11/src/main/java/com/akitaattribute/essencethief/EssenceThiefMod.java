@@ -4,6 +4,8 @@ import com.akitaattribute.essencethief.client.ColorableExperienceOrbRenderer;
 import com.akitaattribute.essencethief.trail.EntityTrailManager;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
+import net.minecraftforge.event.entity.EntityLeaveLevelEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 
@@ -13,6 +15,8 @@ public final class EssenceThiefMod {
 
     public EssenceThiefMod() {
         TickEvent.LevelTickEvent.Post.BUS.addListener(EntityTrailManager::onLevelTick);
+        EntityJoinLevelEvent.BUS.addListener(EntityTrailManager::onEntityJoin);
+        EntityLeaveLevelEvent.BUS.addListener(EntityTrailManager::onEntityLeave);
         if (FMLEnvironment.dist == Dist.CLIENT) {
             ColorableExperienceOrbRenderer.register();
         }
