@@ -1,8 +1,7 @@
 package com.akitaattribute.essencethief.trail;
 
 import com.akitaattribute.essencethief.api.EssenceColor;
-import net.minecraft.core.particles.ColorParticleOption;
-import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraftforge.event.TickEvent;
@@ -14,7 +13,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /** Server-side registry which can decorate mobs, item drops, vanilla entities, and Essence wrappers alike. */
 public final class EntityTrailManager {
-    private static final double CONE_RADIUS = 0.45D;
     private static final int DISCOVERY_INTERVAL_TICKS = 20;
     private static final Map<UUID, TrackedTrail> TRAILS = new ConcurrentHashMap<>();
 
@@ -76,19 +74,15 @@ public final class EntityTrailManager {
                 return false;
             }
 
-            ColorParticleOption particle = ColorParticleOption.create(ParticleTypes.ENTITY_EFFECT, color.redFloat(), color.greenFloat(), color.blueFloat());
+            DustParticleOptions particle = new DustParticleOptions(color.rgb(), 1.0F);
             for (int stream = 0; stream < TrailSchedule.STREAM_COUNT; stream++) {
                 if (!TrailSchedule.shouldSpawn(gameTick, stream)) {
                     continue;
                 }
-                double angle = stream * (Math.PI * 2.0D / TrailSchedule.STREAM_COUNT);
-                double xVelocity = Math.cos(angle) * TrailSchedule.horizontalVelocityPerTick(CONE_RADIUS);
-                double yVelocity = TrailSchedule.upwardVelocityPerTick();
-                double zVelocity = Math.sin(angle) * TrailSchedule.horizontalVelocityPerTick(CONE_RADIUS);
                 tickingLevel.sendParticles(
                     particle,
                     entity.getX(), entity.getBoundingBox().maxY, entity.getZ(),
-                    0, xVelocity, yVelocity, zVelocity, 1.0D
+                    0, 0.0D, TrailSchedule.upwardVelocityPerTick(), 0.0D, 1.0D
                 );
             }
             return false;

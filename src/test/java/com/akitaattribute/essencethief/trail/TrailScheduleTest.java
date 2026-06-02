@@ -46,9 +46,8 @@ class TrailScheduleTest {
     }
 
     @Test
-    void calculatesVelocityForTwoBlockRise() {
+    void calculatesUpwardVelocityForTwoBlockRise() {
         assertEquals(2.0D / 30.0D, TrailSchedule.upwardVelocityPerTick());
-        assertEquals(0.45D / 30.0D, TrailSchedule.horizontalVelocityPerTick(0.45D));
     }
 
 }

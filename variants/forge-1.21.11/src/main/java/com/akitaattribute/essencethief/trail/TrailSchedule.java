@@ -31,9 +31,6 @@ public final class TrailSchedule {
         return RISE_BLOCKS / RISE_TICKS;
     }
 
-    public static double horizontalVelocityPerTick(double finalRadius) {
-        return finalRadius / RISE_TICKS;
-    }
 
     private static void validateStream(int stream) {
         if (stream < 0 || stream >= STREAM_COUNT) {

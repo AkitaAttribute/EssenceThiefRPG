@@ -322,3 +322,51 @@ variants/forge-1.21.11/src/main/java/com/akitaattribute/essencethief/trail/Entit
 ### `variants/forge-1.21.11/src/main/java/com/akitaattribute/essencethief/registry/ModParticles.java`
 - {ModParticles()}
 - {register(modBusGroup+BusGroup)}
+
+## 2026-06-02 Dust Vertical Velocity Update
+
+```text
+changelog/
+└── 2026-06-02-restore-dust-vertical-velocity.md
+
+src/main/java/com/akitaattribute/essencethief/EssenceThiefMod.java
+└── {EssenceThiefMod()}
+
+src/main/java/com/akitaattribute/essencethief/trail/EntityTrailManager.java
+├── {track(entity+Entity, color+EssenceColor)}
+├── {updateColorIfTracked(entity+Entity, color+EssenceColor)}
+├── {untrack(entity+Entity)}
+├── {onEntityJoin(event+EntityJoinLevelEvent)}
+├── {onEntityLeave(event+EntityLeaveLevelEvent)}
+├── {onLevelTick(event+TickEvent.LevelTickEvent)}
+├── {discoverLoadedEntities(level+ServerLevel)}
+├── {autoTrack(entity+Entity)}
+└── TrackedTrail
+    └── {tick(tickingLevel+ServerLevel, gameTick+int)}
+
+src/main/java/com/akitaattribute/essencethief/trail/TrailSchedule.java
+├── {shouldSpawn(gameTick+int, stream+int)}
+├── {isRising(gameTick+int, stream+int)}
+├── {progress(gameTick+int, stream+int)}
+├── {upwardVelocityPerTick()}
+└── {validateStream(stream+int)}
+
+variants/forge-1.21.11/src/main/java/com/akitaattribute/essencethief/trail/EntityTrailManager.java
+├── {track(entity+Entity, color+EssenceColor)}
+├── {updateColorIfTracked(entity+Entity, color+EssenceColor)}
+├── {untrack(entity+Entity)}
+├── {onEntityJoin(event+EntityJoinLevelEvent)}
+├── {onEntityLeave(event+EntityLeaveLevelEvent)}
+├── {onLevelTick(event+TickEvent.LevelTickEvent.Post)}
+├── {discoverLoadedEntities(level+ServerLevel)}
+├── {autoTrack(entity+Entity)}
+└── TrackedTrail
+    └── {tick(tickingLevel+ServerLevel, gameTick+int)}
+
+variants/forge-1.21.11/src/main/java/com/akitaattribute/essencethief/trail/TrailSchedule.java
+├── {shouldSpawn(gameTick+int, stream+int)}
+├── {isRising(gameTick+int, stream+int)}
+├── {progress(gameTick+int, stream+int)}
+├── {upwardVelocityPerTick()}
+└── {validateStream(stream+int)}
+```
