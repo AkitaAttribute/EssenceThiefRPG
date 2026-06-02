@@ -279,3 +279,26 @@ EssenceThiefRPG-codex-create-minecraft-mod-for-custom-essence-xp-orb/
     ├── {register()}
     └── {register(event+RegisterParticleProvidersEvent)}
 ```
+
+
+## 2026-06-01 1.21 Velocity Build Fix Update
+
+```text
+changelog/
+└── 2026-06-01-fix-1.21-velocity-build.md
+
+variants/forge-1.21.11/src/main/java/com/akitaattribute/essencethief/EssenceThiefMod.java
+└── {EssenceThiefMod()}
+
+variants/forge-1.21.11/src/main/java/com/akitaattribute/essencethief/trail/EntityTrailManager.java
+├── {track(entity+Entity, color+EssenceColor)}
+├── {updateColorIfTracked(entity+Entity, color+EssenceColor)}
+├── {untrack(entity+Entity)}
+├── {onEntityJoin(event+EntityJoinLevelEvent)}
+├── {onEntityLeave(event+EntityLeaveLevelEvent)}
+├── {onLevelTick(event+TickEvent.LevelTickEvent.Post)}
+├── {discoverLoadedEntities(level+ServerLevel)}
+├── {autoTrack(entity+Entity)}
+└── TrackedTrail
+    └── {tick(tickingLevel+ServerLevel, gameTick+int)}
+```

@@ -1,7 +1,8 @@
 package com.akitaattribute.essencethief.trail;
 
 import com.akitaattribute.essencethief.api.EssenceColor;
-import com.akitaattribute.essencethief.particle.EssenceRisingParticleOptions;
+import net.minecraft.core.particles.ColorParticleOption;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraftforge.event.TickEvent;
@@ -75,7 +76,7 @@ public final class EntityTrailManager {
                 return false;
             }
 
-            EssenceRisingParticleOptions particle = EssenceRisingParticleOptions.fromColor(color);
+            ColorParticleOption particle = ColorParticleOption.create(ParticleTypes.ENTITY_EFFECT, color.redFloat(), color.greenFloat(), color.blueFloat());
             for (int stream = 0; stream < TrailSchedule.STREAM_COUNT; stream++) {
                 if (!TrailSchedule.shouldSpawn(gameTick, stream)) {
                     continue;
