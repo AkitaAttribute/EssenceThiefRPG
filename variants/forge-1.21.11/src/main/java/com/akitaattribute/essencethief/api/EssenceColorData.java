@@ -36,7 +36,7 @@ public final class EssenceColorData {
         }
         CompoundTag data = entity.getPersistentData();
         if (data.contains(COLOR_NBT_KEY)) {
-            return Optional.of(EssenceColor.fromRgb(data.getInt(COLOR_NBT_KEY)));
+            return data.getInt(COLOR_NBT_KEY).map(EssenceColor::fromRgb);
         }
         return Optional.empty();
     }
