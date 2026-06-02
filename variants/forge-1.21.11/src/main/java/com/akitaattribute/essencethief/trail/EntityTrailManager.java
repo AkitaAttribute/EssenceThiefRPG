@@ -1,7 +1,7 @@
 package com.akitaattribute.essencethief.trail;
 
 import com.akitaattribute.essencethief.api.EssenceColor;
-import net.minecraft.core.particles.DustParticleOptions;
+import com.akitaattribute.essencethief.particle.EssenceRisingParticleOptions;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraftforge.event.TickEvent;
@@ -75,20 +75,19 @@ public final class EntityTrailManager {
                 return false;
             }
 
-            DustParticleOptions particle = new DustParticleOptions(color.rgb(), 1.0F);
+            EssenceRisingParticleOptions particle = EssenceRisingParticleOptions.fromColor(color);
             for (int stream = 0; stream < TrailSchedule.STREAM_COUNT; stream++) {
                 if (!TrailSchedule.shouldSpawn(gameTick, stream)) {
                     continue;
                 }
                 double angle = stream * (Math.PI * 2.0D / TrailSchedule.STREAM_COUNT);
-                double xVelocity = Math.cos(angle) * CONE_RADIUS / TrailSchedule.RISE_TICKS;
-                double zVelocity = Math.sin(angle) * CONE_RADIUS / TrailSchedule.RISE_TICKS;
+                double xVelocity = Math.cos(angle) * TrailSchedule.horizontalVelocityPerTick(CONE_RADIUS);
+                double yVelocity = TrailSchedule.upwardVelocityPerTick();
+                double zVelocity = Math.sin(angle) * TrailSchedule.horizontalVelocityPerTick(CONE_RADIUS);
                 tickingLevel.sendParticles(
                     particle,
-                    entity.getX(),
-                    entity.getBoundingBox().maxY,
-                    entity.getZ(),
-                    0, xVelocity, TrailSchedule.upwardVelocityPerTick(), zVelocity, 1.0D
+                    entity.getX(), entity.getBoundingBox().maxY, entity.getZ(),
+                    0, xVelocity, yVelocity, zVelocity, 1.0D
                 );
             }
             return false;

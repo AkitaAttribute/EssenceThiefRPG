@@ -147,6 +147,7 @@ Generated for future project navigation. Java code files list method-like entrie
 
 ### `src/main/java/com/akitaattribute/essencethief/trail/TrailSchedule.java`
 - {shouldSpawn(gameTick+int, stream+int)}
+- {isRising(gameTick+int, stream+int)}
 - {progress(gameTick+int, stream+int)}
 - {upwardVelocityPerTick()}
 - {validateStream(stream+int)}
@@ -219,6 +220,7 @@ Generated for future project navigation. Java code files list method-like entrie
 
 ### `variants/forge-1.21.11/src/main/java/com/akitaattribute/essencethief/trail/TrailSchedule.java`
 - {shouldSpawn(gameTick+int, stream+int)}
+- {isRising(gameTick+int, stream+int)}
 - {progress(gameTick+int, stream+int)}
 - {upwardVelocityPerTick()}
 - {validateStream(stream+int)}
@@ -228,3 +230,52 @@ Generated for future project navigation. Java code files list method-like entrie
 
 ### `variants/forge-1.21.11/src/test/java/com/akitaattribute/essencethief/trail/TrailScheduleTest.java`
 - No method declarations found.
+
+## 2026-06-01 Velocity Particle Additions
+
+```text
+EssenceThiefRPG-codex-create-minecraft-mod-for-custom-essence-xp-orb/
+├── changelog/
+│   └── 2026-06-01-velocity-based-rising-particles.md
+├── src/main/java/com/akitaattribute/essencethief/registry/ModParticles.java
+│   └── {register(modEventBus+IEventBus)}
+├── src/main/java/com/akitaattribute/essencethief/particle/EssenceRisingParticleOptions.java
+│   ├── {fromColor(color+EssenceColor)}
+│   ├── {getType()}
+│   ├── {writeToNetwork(buffer+FriendlyByteBuf)}
+│   ├── {writeToString()}
+│   └── {clamp01(value+float)}
+├── src/main/java/com/akitaattribute/essencethief/particle/EssenceRisingParticleType.java
+│   ├── {EssenceRisingParticleType(overrideLimiter+boolean)}
+│   └── {codec()}
+├── src/main/java/com/akitaattribute/essencethief/client/particle/EssenceRisingParticle.java
+│   ├── {EssenceRisingParticle(level+ClientLevel, x+double, y+double, z+double, xVelocity+double, yVelocity+double, zVelocity+double, options+EssenceRisingParticleOptions, sprites+SpriteSet)}
+│   ├── {getRenderType()}
+│   ├── {tick()}
+│   └── Provider
+│       ├── {Provider(sprites+SpriteSet)}
+│       └── {createParticle(options+EssenceRisingParticleOptions, level+ClientLevel, x+double, y+double, z+double, xVelocity+double, yVelocity+double, zVelocity+double)}
+├── src/main/java/com/akitaattribute/essencethief/client/particle/EssenceParticleProviders.java
+│   └── {register(event+RegisterParticleProvidersEvent)}
+├── variants/forge-1.21.11/src/main/java/com/akitaattribute/essencethief/registry/ModParticles.java
+│   └── {register(modBusGroup+BusGroup)}
+├── variants/forge-1.21.11/src/main/java/com/akitaattribute/essencethief/particle/EssenceRisingParticleOptions.java
+│   ├── {fromColor(color+EssenceColor)}
+│   ├── {getType()}
+│   ├── {writeToNetwork(buffer+FriendlyByteBuf)}
+│   ├── {writeToString()}
+│   └── {clamp01(value+float)}
+├── variants/forge-1.21.11/src/main/java/com/akitaattribute/essencethief/particle/EssenceRisingParticleType.java
+│   ├── {EssenceRisingParticleType(overrideLimiter+boolean)}
+│   └── {codec()}
+├── variants/forge-1.21.11/src/main/java/com/akitaattribute/essencethief/client/particle/EssenceRisingParticle.java
+│   ├── {EssenceRisingParticle(level+ClientLevel, x+double, y+double, z+double, xVelocity+double, yVelocity+double, zVelocity+double, options+EssenceRisingParticleOptions, sprites+SpriteSet)}
+│   ├── {getRenderType()}
+│   ├── {tick()}
+│   └── Provider
+│       ├── {Provider(sprites+SpriteSet)}
+│       └── {createParticle(options+EssenceRisingParticleOptions, level+ClientLevel, x+double, y+double, z+double, xVelocity+double, yVelocity+double, zVelocity+double)}
+└── variants/forge-1.21.11/src/main/java/com/akitaattribute/essencethief/client/particle/EssenceParticleProviders.java
+    ├── {register()}
+    └── {register(event+RegisterParticleProvidersEvent)}
+```

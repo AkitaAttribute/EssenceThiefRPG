@@ -2,7 +2,7 @@ package com.akitaattribute.essencethief.trail;
 
 import com.akitaattribute.essencethief.EssenceThiefMod;
 import com.akitaattribute.essencethief.api.EssenceColor;
-import net.minecraft.core.particles.DustParticleOptions;
+import com.akitaattribute.essencethief.particle.EssenceRisingParticleOptions;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraftforge.event.TickEvent;
@@ -10,8 +10,6 @@ import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.EntityLeaveLevelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import org.joml.Vector3f;
-
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -84,22 +82,19 @@ public final class EntityTrailManager {
                 return false;
             }
 
-            DustParticleOptions particle = new DustParticleOptions(
-                new Vector3f(color.redFloat(), color.greenFloat(), color.blueFloat()), 1.0F
-            );
+            EssenceRisingParticleOptions particle = EssenceRisingParticleOptions.fromColor(color);
             for (int stream = 0; stream < TrailSchedule.STREAM_COUNT; stream++) {
                 if (!TrailSchedule.shouldSpawn(gameTick, stream)) {
                     continue;
                 }
                 double angle = stream * (Math.PI * 2.0D / TrailSchedule.STREAM_COUNT);
-                double xVelocity = Math.cos(angle) * CONE_RADIUS / TrailSchedule.RISE_TICKS;
-                double zVelocity = Math.sin(angle) * CONE_RADIUS / TrailSchedule.RISE_TICKS;
+                double xVelocity = Math.cos(angle) * TrailSchedule.horizontalVelocityPerTick(CONE_RADIUS);
+                double yVelocity = TrailSchedule.upwardVelocityPerTick();
+                double zVelocity = Math.sin(angle) * TrailSchedule.horizontalVelocityPerTick(CONE_RADIUS);
                 tickingLevel.sendParticles(
                     particle,
-                    entity.getX(),
-                    entity.getBoundingBox().maxY,
-                    entity.getZ(),
-                    0, xVelocity, TrailSchedule.upwardVelocityPerTick(), zVelocity, 1.0D
+                    entity.getX(), entity.getBoundingBox().maxY, entity.getZ(),
+                    0, xVelocity, yVelocity, zVelocity, 1.0D
                 );
             }
             return false;

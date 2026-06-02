@@ -36,4 +36,19 @@ class TrailScheduleTest {
         assertTrue(TrailSchedule.shouldSpawn(TrailSchedule.CYCLE_TICKS, 0));
     }
 
+    @Test
+    void keepsStreamsActiveWhileRising() {
+        assertTrue(TrailSchedule.isRising(0, 0));
+        assertTrue(TrailSchedule.isRising(29, 0));
+        assertFalse(TrailSchedule.isRising(30, 0));
+        assertFalse(TrailSchedule.isRising(39, 0));
+        assertTrue(TrailSchedule.isRising(40, 0));
+    }
+
+    @Test
+    void calculatesVelocityForTwoBlockRise() {
+        assertEquals(2.0D / 30.0D, TrailSchedule.upwardVelocityPerTick());
+        assertEquals(0.45D / 30.0D, TrailSchedule.horizontalVelocityPerTick(0.45D));
+    }
+
 }
