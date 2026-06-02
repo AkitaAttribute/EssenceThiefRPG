@@ -9,7 +9,8 @@ Generated for future project navigation. Java code files list method-like entrie
 │   └── workflows
 │       └── build.yml
 ├── changelog
-│   └── 2026-06-01-prompt-fixes.md
+│   ├── 2026-06-01-prompt-fixes.md
+│   └── 2026-06-01-fix-1.21-stale-custom-particle-files.md
 ├── src
 │   ├── main
 │   │   ├── java
@@ -302,3 +303,22 @@ variants/forge-1.21.11/src/main/java/com/akitaattribute/essencethief/trail/Entit
 └── TrackedTrail
     └── {tick(tickingLevel+ServerLevel, gameTick+int)}
 ```
+
+
+### `variants/forge-1.21.11/src/main/java/com/akitaattribute/essencethief/client/particle/EssenceRisingParticle.java`
+- {EssenceRisingParticle()}
+
+### `variants/forge-1.21.11/src/main/java/com/akitaattribute/essencethief/client/particle/EssenceParticleProviders.java`
+- {register()}
+- {register(event+RegisterParticleProvidersEvent)}
+
+### `variants/forge-1.21.11/src/main/java/com/akitaattribute/essencethief/particle/EssenceRisingParticleOptions.java`
+- {EssenceRisingParticleOptions(red+float, green+float, blue+float, scale+float)}
+- {fromColor(color+EssenceColor)}
+
+### `variants/forge-1.21.11/src/main/java/com/akitaattribute/essencethief/particle/EssenceRisingParticleType.java`
+- {EssenceRisingParticleType()}
+
+### `variants/forge-1.21.11/src/main/java/com/akitaattribute/essencethief/registry/ModParticles.java`
+- {ModParticles()}
+- {register(modBusGroup+BusGroup)}
