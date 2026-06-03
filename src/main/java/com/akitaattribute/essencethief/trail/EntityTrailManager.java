@@ -86,13 +86,16 @@ public final class EntityTrailManager {
                 new Vector3f(color.redFloat(), color.greenFloat(), color.blueFloat()), 1.0F
             );
             for (int stream = 0; stream < TrailSchedule.STREAM_COUNT; stream++) {
-                if (!TrailSchedule.shouldSpawn(gameTick, stream)) {
+                double progress = TrailSchedule.progress(gameTick, stream);
+                if (progress < 0.0D) {
                     continue;
                 }
                 tickingLevel.sendParticles(
                     particle,
-                    entity.getX(), entity.getBoundingBox().maxY, entity.getZ(),
-                    0, 0.0D, TrailSchedule.upwardVelocityPerTick(), 0.0D, 1.0D
+                    entity.getX(),
+                    entity.getBoundingBox().maxY + TrailSchedule.RISE_BLOCKS * progress,
+                    entity.getZ(),
+                    1, 0.0D, 0.0D, 0.0D, 0.0D
                 );
             }
             return false;

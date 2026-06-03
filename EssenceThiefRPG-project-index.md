@@ -370,3 +370,16 @@ variants/forge-1.21.11/src/main/java/com/akitaattribute/essencethief/trail/Trail
 ├── {upwardVelocityPerTick()}
 └── {validateStream(stream+int)}
 ```
+
+## Patch Addition - 2026-06-02 Restore Position-Stepped Dust Rise
+
+```text
+changelog/
+└── 2026-06-02-restore-position-stepped-dust-rise.md
+src/main/java/com/akitaattribute/essencethief/trail/EntityTrailManager.java
+└── TrackedTrail
+    └── {tick(tickingLevel+ServerLevel, gameTick+int)}
+variants/forge-1.21.11/src/main/java/com/akitaattribute/essencethief/trail/EntityTrailManager.java
+└── TrackedTrail
+    └── {tick(tickingLevel+ServerLevel, gameTick+int)}
+```
