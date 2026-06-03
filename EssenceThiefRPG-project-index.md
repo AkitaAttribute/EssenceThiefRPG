@@ -408,3 +408,12 @@ variants/forge-1.21.11/src/main/java/com/akitaattribute/essencethief/trail/Entit
 └── TrackedTrail
     └── {tick(tickingLevel+ServerLevel, gameTick+int)}
 ```
+
+## Changelog Addition: 2026-06-02 Fix 1.21 Targeted Particle sendParticles Signature
+
+```text
+changelog/
+└── 2026-06-02-fix-1.21-targeted-particle-sendparticles-signature.md
+variants/forge-1.21.11/src/main/java/com/akitaattribute/essencethief/trail/EntityTrailManager.java
+└── {sendForcedParticle(level+ServerLevel, targetPlayers+Iterable<ServerPlayer>, particle+T, x+double, y+double, z+double, count+int, xOffset+double, yOffset+double, zOffset+double, speed+double)}
+```

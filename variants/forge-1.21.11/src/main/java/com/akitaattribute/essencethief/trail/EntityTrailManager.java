@@ -131,7 +131,7 @@ public final class EntityTrailManager {
         Iterable<ServerPlayer> resolvedPlayers = targetPlayers == null ? level.players() : targetPlayers;
         for (ServerPlayer player : resolvedPlayers) {
             if (player != null) {
-                level.sendParticles(player, particle, true, x, y, z, count, xOffset, yOffset, zOffset, speed);
+                level.sendParticles(player, particle, true, true, x, y, z, count, xOffset, yOffset, zOffset, speed);
             }
         }
     }
