@@ -22,11 +22,9 @@ jobs:
             jar: build/libs/essencethief-1.20.1-*.jar
           - name: minecraft-1.21.11
             project_dir: variants/forge-1.21.11
-            java: |-
-              21
-              25
+            java: '21'
             gradle: '9.3.1'
-            gradle_args: '-Dorg.gradle.java.installations.paths=${JAVA_HOME_21_X64},${JAVA_HOME_25_X64}'
+            gradle_args: ''
             jar: variants/forge-1.21.11/build/libs/essencethief-1.21.11-*.jar
     runs-on: ubuntu-latest
     steps:

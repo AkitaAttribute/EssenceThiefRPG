@@ -417,3 +417,15 @@ changelog/
 variants/forge-1.21.11/src/main/java/com/akitaattribute/essencethief/trail/EntityTrailManager.java
 └── {sendForcedParticle(level+ServerLevel, targetPlayers+Iterable<ServerPlayer>, particle+T, x+double, y+double, z+double, count+int, xOffset+double, yOffset+double, zOffset+double, speed+double)}
 ```
+
+
+## 2026-06-02 JDK 25 PR Build Fix Addendum
+
+```text
+EssenceThiefRPG-codex-create-minecraft-mod-for-custom-essence-xp-orb/
+├── .github/workflows/build.yml
+│   ├── {build matrix minecraft-1.20.1 java 17}
+│   └── {build matrix minecraft-1.21.11 java 21 only}
+└── changelog/
+    └── 2026-06-02-fix-1.21-pr-jdk25-mavenizer-failure.md
+```
