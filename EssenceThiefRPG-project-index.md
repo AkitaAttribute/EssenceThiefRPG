@@ -136,6 +136,7 @@ Generated for future project navigation. Java code files list method-like entrie
 
 ### `src/main/java/com/akitaattribute/essencethief/trail/EntityTrailManager.java`
 - {track(entity+Entity, color+EssenceColor)}
+- {track(entity+Entity, color+EssenceColor, targetPlayers+Iterable<ServerPlayer>)}
 - {updateColorIfTracked(entity+Entity, color+EssenceColor)}
 - {untrack(entity+Entity)}
 - {onEntityJoin(event+EntityJoinLevelEvent)}
@@ -143,7 +144,11 @@ Generated for future project navigation. Java code files list method-like entrie
 - {onLevelTick(event+TickEvent.LevelTickEvent)}
 - {discoverLoadedEntities(level+ServerLevel)}
 - {autoTrack(entity+Entity)}
-- {TrackedTrail(entity+Entity, color+EssenceColor)}
+- {toVisiblePlayerIds(targetPlayers+Iterable<ServerPlayer>)}
+- {visiblePlayers(level+ServerLevel, visiblePlayerIds+Set<UUID>)}
+- {sendForcedParticle(level+ServerLevel, particle+T, x+double, y+double, z+double, count+int, xOffset+double, yOffset+double, zOffset+double, speed+double)}
+- {sendForcedParticle(level+ServerLevel, targetPlayers+Iterable<ServerPlayer>, particle+T, x+double, y+double, z+double, count+int, xOffset+double, yOffset+double, zOffset+double, speed+double)}
+- {TrackedTrail(entity+Entity, color+EssenceColor, visiblePlayerIds+Set<UUID>)}
 - {tick(tickingLevel+ServerLevel, gameTick+int)}
 
 ### `src/main/java/com/akitaattribute/essencethief/trail/TrailSchedule.java`
@@ -209,6 +214,7 @@ Generated for future project navigation. Java code files list method-like entrie
 
 ### `variants/forge-1.21.11/src/main/java/com/akitaattribute/essencethief/trail/EntityTrailManager.java`
 - {track(entity+Entity, color+EssenceColor)}
+- {track(entity+Entity, color+EssenceColor, targetPlayers+Iterable<ServerPlayer>)}
 - {updateColorIfTracked(entity+Entity, color+EssenceColor)}
 - {untrack(entity+Entity)}
 - {onEntityJoin(event+EntityJoinLevelEvent)}
@@ -216,7 +222,11 @@ Generated for future project navigation. Java code files list method-like entrie
 - {onLevelTick(event+TickEvent.LevelTickEvent.Post)}
 - {discoverLoadedEntities(level+ServerLevel)}
 - {autoTrack(entity+Entity)}
-- {TrackedTrail(entity+Entity, color+EssenceColor)}
+- {toVisiblePlayerIds(targetPlayers+Iterable<ServerPlayer>)}
+- {visiblePlayers(level+ServerLevel, visiblePlayerIds+Set<UUID>)}
+- {sendForcedParticle(level+ServerLevel, particle+T, x+double, y+double, z+double, count+int, xOffset+double, yOffset+double, zOffset+double, speed+double)}
+- {sendForcedParticle(level+ServerLevel, targetPlayers+Iterable<ServerPlayer>, particle+T, x+double, y+double, z+double, count+int, xOffset+double, yOffset+double, zOffset+double, speed+double)}
+- {TrackedTrail(entity+Entity, color+EssenceColor, visiblePlayerIds+Set<UUID>)}
 - {tick(tickingLevel+ServerLevel, gameTick+int)}
 
 ### `variants/forge-1.21.11/src/main/java/com/akitaattribute/essencethief/trail/TrailSchedule.java`
@@ -380,6 +390,21 @@ src/main/java/com/akitaattribute/essencethief/trail/EntityTrailManager.java
 └── TrackedTrail
     └── {tick(tickingLevel+ServerLevel, gameTick+int)}
 variants/forge-1.21.11/src/main/java/com/akitaattribute/essencethief/trail/EntityTrailManager.java
+└── TrackedTrail
+    └── {tick(tickingLevel+ServerLevel, gameTick+int)}
+```
+
+## Patch Addition - 2026-06-02 Force Long-Distance Particle Rendering
+
+```text
+changelog/
+└── 2026-06-02-force-long-distance-particle-rendering.md
+src/main/java/com/akitaattribute/essencethief/trail/EntityTrailManager.java
+├── {sendForcedParticle(level+ServerLevel, particle+T, x+double, y+double, z+double, count+int, xOffset+double, yOffset+double, zOffset+double, speed+double)}
+└── TrackedTrail
+    └── {tick(tickingLevel+ServerLevel, gameTick+int)}
+variants/forge-1.21.11/src/main/java/com/akitaattribute/essencethief/trail/EntityTrailManager.java
+├── {sendForcedParticle(level+ServerLevel, particle+T, x+double, y+double, z+double, count+int, xOffset+double, yOffset+double, zOffset+double, speed+double)}
 └── TrackedTrail
     └── {tick(tickingLevel+ServerLevel, gameTick+int)}
 ```
